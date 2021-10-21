@@ -133,26 +133,26 @@ router.beforeEach((to, from, next) => {
   next();
 });
 
-router.beforeEach(async (to, from, next) => {
-  let user = firebase.auth().currentUser;
-  let admin = null;
-  if (user) {
-    let token = await user.getIdTokenResult();
-    admin = token.claims.admin;
-  }
-  if (to.matched.some((res) => res.meta.requiresAuth)) {
-    if (user) {
-      if (to.matched.some((res) => res.meta.requiresAdmin)) {
-        if (admin) {
-          return next();
-        }
-        return next({ name: "Home" });
-      }
-      return next();
-    }
-    return next({ name: "Home" });
-  }
-  return next();
-});
+// router.beforeEach(async (to, from, next) => {
+//   let user = firebase.auth().currentUser;
+//   let admin = null;
+//   if (user) {
+//     let token = await user.getIdTokenResult();
+//     admin = token.claims.admin;
+//   }
+//   if (to.matched.some((res) => res.meta.requiresAuth)) {
+//     if (user) {
+//       if (to.matched.some((res) => res.meta.requiresAdmin)) {
+//         if (admin) {
+//           return next();
+//         }
+//         return next({ name: "Home" });
+//       }
+//       return next();
+//     }
+//     return next({ name: "Home" });
+//   }
+//   return next();
+// });
 
 export default router;
